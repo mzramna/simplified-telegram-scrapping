@@ -11,21 +11,21 @@ class simp_telegram_client():
         self.client.start()
         self.max_error = max_error
 
-    def enviar_arquivo_multiplo(self, contatos, arquivo):
+    def send_file_to_multiple_destin(self, contatos, arquivo):
         for contato in contatos:
             try:
                 self.client.send_file(contato, arquivo)
             except Exception as e:
                 print(e)
 
-    def enviar_mensagem_multiplo(self, contatos, texto):
+    def send_message_to_multiple_destin(self, contatos, texto):
         for contato in contatos:
             try:
                 self.client.send_message(contato, texto)
             except Exception as e:
                 print(e)
 
-    def listar_mensagem_com(self, contato, texto, limite=20, reverse=False):
+    def list_messages_with(self, contato, texto, limite=20, reverse=False):
         query = self.client.iter_messages(contato, limit=1, reverse=reverse)
         max_id = 0
         min_id = 0
