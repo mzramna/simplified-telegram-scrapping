@@ -2,18 +2,7 @@ import os
 
 from telethon import TelegramClient
 
-import voice_manage
-
 import re
-
-
-def Find_url(string):
-    # findall() has been used
-    # with valid conditions for urls in string
-    regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
-    url = re.findall(regex, string)
-    return [x[0] for x in url]
-
 
 class simp_telegram_client():
 
@@ -35,21 +24,6 @@ class simp_telegram_client():
                 self.client.send_message(contato, texto)
             except Exception as e:
                 print(e)
-
-    def enviar_audio_sintetico_multiplo(self, contatos, texto):
-        arquivo = "./mensagem.mp3"
-        voice_manage.tts_string(texto, output=arquivo)
-        self.enviar_arquivo_multiplo(self.client, contatos, arquivo)
-        os.remove(arquivo)
-
-    def enviar_audio_sintetico(self, contato, texto):
-        arquivo = "./mensagem.mp3"
-        voice_manage.tts_string(texto, output=arquivo)
-        self.client.send_file(contato, arquivo)
-        os.remove(arquivo)
-
-    def get_group_id(self, linkgrupo):
-        return self.client.get_entity(linkgrupo)
 
     def listar_mensagem_com(self, contato, texto, limite=20, reverse=False):
         query = self.client.iter_messages(contato, limit=1, reverse=reverse)
